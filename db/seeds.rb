@@ -17,3 +17,15 @@ airports = Airport.create([
     {city: 'Dallas', state: 'TX', airport_code: 'DFW'},
     {city: 'Denver', state: 'CO', airport_code: 'DEN'}
 ])
+def rand_time(from, to=Time.now)
+    Time.at(rand_in_range(from.to_f, to.to_f))
+end
+
+def rand_in_range(from, to)
+    rand * (to - from) + from
+end
+flights = []
+(1..30).each do |int|
+    Flight.create([:departure_time => rand_time(int.days.from_now), :duration=> "2hrs", :destination_airport_id => rand(1..9), :arrival_airport_id => rand(1..9)])
+end
+
