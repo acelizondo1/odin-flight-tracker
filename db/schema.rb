@@ -26,14 +26,14 @@ ActiveRecord::Schema.define(version: 2021_09_22_214709) do
   create_table "flights", force: :cascade do |t|
     t.datetime "departure_time"
     t.string "duration"
-    t.bigint "destination_airport_id"
-    t.bigint "arrival_airport_id"
+    t.bigint "to_airport_id"
+    t.bigint "from_airport_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["arrival_airport_id"], name: "index_flights_on_arrival_airport_id"
-    t.index ["destination_airport_id"], name: "index_flights_on_destination_airport_id"
+    t.index ["from_airport_id"], name: "index_flights_on_from_airport_id"
+    t.index ["to_airport_id"], name: "index_flights_on_to_airport_id"
   end
 
-  add_foreign_key "flights", "airports", column: "arrival_airport_id"
-  add_foreign_key "flights", "airports", column: "destination_airport_id"
+  add_foreign_key "flights", "airports", column: "from_airport_id"
+  add_foreign_key "flights", "airports", column: "to_airport_id"
 end

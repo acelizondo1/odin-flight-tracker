@@ -26,6 +26,11 @@ def rand_in_range(from, to)
 end
 flights = []
 (1..30).each do |int|
-    Flight.create([:departure_time => rand_time(int.days.from_now), :duration=> "2hrs", :destination_airport_id => rand(1..9), :arrival_airport_id => rand(1..9)])
+    to_airport = rand(1..9)
+    from_airport = rand(1..9)
+    while to_airport == from_airport
+        from_airport = rand(1..9)
+    end
+    Flight.create([:departure_time => rand_time(int.days.from_now), :duration=> "2hrs", :to_airport_id => to_airport, :from_airport_id => from_airport])
 end
 
