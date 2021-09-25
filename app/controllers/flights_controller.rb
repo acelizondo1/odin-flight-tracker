@@ -3,6 +3,7 @@ class FlightsController < ApplicationController
     def index
         if params['from_airport_id']
             @search_submit = true
+            @found_flights = Flight.find_flights(params['from_airport_id'], params['to_airport_id'], params['date'])
         end
         @from_airport = Airport.all.map { |a| ["#{a.city}, #{a.state} (#{a.airport_code})", a.id] }
         @to_airport = Airport.all.map { |a| ["#{a.city}, #{a.state} (#{a.airport_code})", a.id] }
