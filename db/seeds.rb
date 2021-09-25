@@ -25,7 +25,7 @@ def rand_in_range(from, to)
     rand * (to - from) + from
 end
 flights = []
-(1..30).each do |int|
+(1..60).each do |int|
     to_airport = rand(1..9)
     from_airport = rand(1..9)
     while to_airport == from_airport
