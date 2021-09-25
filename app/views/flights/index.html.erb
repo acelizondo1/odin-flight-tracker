@@ -1,0 +1,42 @@
+<div class="columns">
+    <div class="column is-three-fifths is-offset-one-fifth">
+        <h3 class="is-size-3 has-text-black is-justify-content-center has-text-weight-bold">Search For Flights</h3>
+        <br />
+        <%= form_with url: root_path, method: :get do |form| %>
+
+            <div class="actions">
+
+                <div class="field is-horizontal">
+                    <div class="field-label is-medium">
+                        <%= form.label "From: ", class: "label" %>
+                    </div>
+                    <div class="field-body">
+                        <div class="field is-narrow">
+                            <div class="control">
+                                <div class="select is-fullwidth">
+                                    <%= select_tag(:from_airport_id, options_for_select(@from_airport)) %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field-label is-medium">
+                        <%= form.label "To: ", class: "label" %>
+                    </div>
+                    <div class="field-body">
+                        <div class="field is-narrow">
+                            <div class="control">
+                                <div class="select is-fullwidth">
+                                    <%= select_tag(:to_airport_id, options_for_select(@to_airport)) %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <%= form.submit 'Search', class: "button is-info is-medium" %>
+            </div>
+
+        <% end %>
+    </div>
+</div>
