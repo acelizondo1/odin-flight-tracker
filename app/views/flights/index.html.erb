@@ -6,11 +6,11 @@
 
             <div class="actions">
 
-                <div class="field is-horizontal">
-                    <div class="field-label is-medium">
-                        <%= form.label "From: ", class: "label" %>
+                <div class="field is-horizontal columns">
+                    <div class="field-label is-medium column is-1 is-align-self-center">
+                        <%= form.label "From", class: "label" %>
                     </div>
-                    <div class="field-body">
+                    <div class="field-body column is-4">
                         <div class="field is-narrow">
                             <div class="control">
                                 <div class="select is-fullwidth">
@@ -20,10 +20,10 @@
                         </div>
                     </div>
 
-                    <div class="field-label is-medium">
-                        <%= form.label "To: ", class: "label" %>
+                    <div class="field-label is-medium column is-1 is-align-self-center">
+                        <%= form.label "To", class: "label" %>
                     </div>
-                    <div class="field-body">
+                    <div class="field-body column is-4">
                         <div class="field is-narrow">
                             <div class="control">
                                 <div class="select is-fullwidth">
@@ -33,34 +33,35 @@
                         </div>
                     </div>
                 </div>
-                <div class="field is-horizontal">
-                    <div class="field-label is-medium is-flex-grow-4">
-                        <%= form.label "Number of Passengers", class: "label" %>
+                <div class="field is-horizontal columns">
+                    <div class="field-label is-medium column is-2 is-align-self-center">
+                        <%= form.label "Passengers", class: "label" %>
                     </div>
-                    <div class="field-body">
+                    <div class="field-body column is-2">
                         <div class="field is-narrow">
                             <div class="control">
                                 <div class="select is-fullwidth">
-                                    <%= select_tag(:passengers, options_for_select([[1,1],[2,2],[3,3],[4,4],[5,5]])) %>
+                                    <%= select_tag(:passengers, options_for_select([[1,1],[2,2],[3,3],[4,4]])) %>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="field is-horizontal">
-                    <div class="field-label is-medium">
-                        <%= form.label :date, class: "label" %>
-                    </div>
-                    <div class="field-body">
-                        <div class="field">
-                            <div class="control">
-                                <div class="select">
-                                    <%= select_tag(:departure_times, options_for_select(@departure_times))%>
+                
+                        <div class="field-label is-medium column is-1 is-offset-2 is-align-self-center">
+                            <%= form.label :date, class: "label" %>
+                        </div>
+                        <div class="field-body column is-3">
+                            <div class="field">
+                                <div class="control">
+                                    <div class="select">
+                                        <%= select_tag(:departure_times, options_for_select(@departure_times))%>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    
                 </div>
+                
                 <br />
                 <%= form.submit 'Search', class: "button is-info is-medium" %>
             </div>
