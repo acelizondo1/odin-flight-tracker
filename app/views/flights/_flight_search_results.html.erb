@@ -19,7 +19,7 @@
                     <th><%= Airport.details(flight.to_airport_id) %></th>
                     <th><%= flight.departure_time.strftime('%a, %b %d, %Y') %></th>
                     <th><%= flight.departure_time.strftime('%l:%M %p') %></th>
-                    <th><%= flight.duration %></th>
+                    <th><%= Time.at(flight.duration.to_i).utc.strftime("%k hr %M min") %></th>
                     <th><%= link_to 'Book', root_path, class: 'button is-info is-small' %></th>
                 </tr>
             <% end %>
