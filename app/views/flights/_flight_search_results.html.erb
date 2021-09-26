@@ -27,7 +27,7 @@
                 <% end %>
             </tbody>
         </table>
-        <%= form.hidden_field, :passengers, value: @passengers%>
+        <%= form.hidden_field :passengers, value: @passengers %>
         <%= link_to 'Continue to Passenger Details', root_path, class: 'button is-info'%>
     <% end %>
 <% else %>
