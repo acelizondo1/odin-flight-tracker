@@ -1,0 +1,57 @@
+<%= form_with(model: @booking) do |form| %>
+    <div class="columns m-6">
+        <div class="column is-4 is-offset-1" id="flight_details">
+            <div class="box has-text-left">
+                <h3 class="is-size-4 has-text-weight-bold">Booking Flight For:</h3>
+                <div class="m-3"> 
+                    <p>
+                        <strong>Flight:</strong>
+                        <%= @flight.id %>
+                    </p>
+                    <p>
+                        <strong>From: </strong>
+                        <%= Airport.details(@flight.from_airport_id) %>
+                    </p>
+                    <p>
+                        <strong>To: </strong>
+                        <%= Airport.details(@flight.to_airport_id) %>
+                    </p>
+                    <p>
+                        <strong>Departing At: </strong>
+                        <%= @flight.departure_time.strftime('%a, %b %d, %Y at %l:%M %p') %>
+                    </p>
+                    <p>
+                        <strong>Flight Time: </strong>
+                        <%= Time.at(@flight.duration.to_i).utc.strftime("%k hr %M min") %>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="column is-5 box m-3" id="passenger_form">
+            <h5 class="is-size-5 has-text-left"><strong>Please Enter Passenger Information</strong></h5>
+            <% @passengers.each_with_index do |passenger, i| %>
+                <%= form.fields_for passenger do |passenger_form| %>
+                    <h6 class="is-size-6 has-text-left m-2"><strong>Passenger <%= i+1 %></strong></h6>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-align-self-center has-text-weight-semibold">
+                            <%= passenger_form.label :name %> 
+                        </div>
+                        <div class="field-body">
+                            <%= passenger_form.text_field :name, class: 'input' %>
+                        </div>
+                    </div>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-align-self-center has-text-weight-semibold">
+                            <%= passenger_form.label :email %> 
+                        </div>
+                        <div class="field-body">
+                            <%= passenger_form.text_field :email, class: 'input' %>
+                        </div>
+                    </div>
+                <% end %>
+            <% end %>
+            <%= form.submit 'Confirm Booking', class: "button" %>
+        </div>
+    </div>
+<% end %>
