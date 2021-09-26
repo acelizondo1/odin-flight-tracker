@@ -1,30 +1,35 @@
 <% if !@found_flights.empty? %>
-    <table class="table m-3 is-fullwidth is-striped is-hoverable">
-        <thead>
-            <tr>
-                <th>Flight</th>
-                <th>Departing From</th>
-                <th>Arriving To</th>
-                <th>Date</th>
-                <th>Takeoff Time</th>
-                <th>Flight Time</th>
-                <th>Book</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% @found_flights.each do |flight| %>
+    <%= form_with url: root_path do |form| %>
+        <table class="table m-3 is-fullwidth is-striped is-hoverable">
+            <thead>
                 <tr>
-                    <th><%= flight.id %></th>
-                    <th><%= Airport.details(flight.from_airport_id) %></th>
-                    <th><%= Airport.details(flight.to_airport_id) %></th>
-                    <th><%= flight.departure_time.strftime('%a, %b %d, %Y') %></th>
-                    <th><%= flight.departure_time.strftime('%l:%M %p') %></th>
-                    <th><%= Time.at(flight.duration.to_i).utc.strftime("%k hr %M min") %></th>
-                    <th><%= link_to 'Book', root_path, class: 'button is-info is-small' %></th>
+                    <th>Flight</th>
+                    <th>Departing From</th>
+                    <th>Arriving To</th>
+                    <th>Date</th>
+                    <th>Takeoff Time</th>
+                    <th>Flight Time</th>
+                    <th>Select Flight</th>
                 </tr>
-            <% end %>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <% @found_flights.each do |flight| %>
+                    <tr>
+                        <th><%= flight.id %></th>
+                        <th><%= Airport.details(flight.from_airport_id) %></th>
+                        <th><%= Airport.details(flight.to_airport_id) %></th>
+                        <th><%= flight.departure_time.strftime('%a, %b %d, %Y') %></th>
+                        <th><%= flight.departure_time.strftime('%l:%M %p') %></th>
+                        <th><%= Time.at(flight.duration.to_i).utc.strftime("%k hr %M min") %></th>
+                        <!--<th><%= link_to 'Book', root_path, class: 'button is-info is-small' %></th>-->
+                        <th><%= form.radio_button :flight_id, flight.id %></th>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+        <%= form.hidden_field, :passengers, value: @passengers%>
+        <%= link_to 'Continue to Passenger Details', root_path, class: 'button is-info'%>
+    <% end %>
 <% else %>
     <div class="m-6">
         <div class="box">
