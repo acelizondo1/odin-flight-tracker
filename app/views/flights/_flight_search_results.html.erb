@@ -1,6 +1,6 @@
 <% if !@found_flights.empty? %>
     <%= form_with url: root_path do |form| %>
-        <table class="table m-3 is-fullwidth is-striped is-hoverable">
+        <table class="table m-3 is-fullwidth is-light is-hoverable">
             <thead>
                 <tr>
                     <th>Flight</th>
@@ -28,7 +28,7 @@
             </tbody>
         </table>
         <%= form.hidden_field :passengers, value: @passengers %>
-        <%= link_to 'Continue to Passenger Details', root_path, class: 'button is-info'%>
+        <%= link_to 'Continue to Passenger Details', root_path, class: 'button is-success is-light is-rounded'%>
     <% end %>
 <% else %>
     <div class="m-6">
