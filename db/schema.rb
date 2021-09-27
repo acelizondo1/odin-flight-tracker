@@ -44,14 +44,14 @@ ActiveRecord::Schema.define(version: 2021_09_26_140149) do
   create_table "passengers", force: :cascade do |t|
     t.string "name"
     t.string "email"
-    t.bigint "bookings_id"
+    t.bigint "booking_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["bookings_id"], name: "index_passengers_on_bookings_id"
+    t.index ["booking_id"], name: "index_passengers_on_booking_id"
   end
 
   add_foreign_key "bookings", "flights"
   add_foreign_key "flights", "airports", column: "from_airport_id"
   add_foreign_key "flights", "airports", column: "to_airport_id"
-  add_foreign_key "passengers", "bookings", column: "bookings_id"
+  add_foreign_key "passengers", "bookings"
 end

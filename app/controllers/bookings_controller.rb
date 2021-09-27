@@ -2,19 +2,23 @@ class BookingsController < ApplicationController
 
     def new
         @flight = Flight.find(params["flight_id"])
-        @booking = @flight.bookings.build
-        puts params["passengers"]
-        @passengers = []
-        params["passengers"].to_i.times do
-            @passengers.push(Passenger.new)
+        @booking = Booking.new
+        @passengers = params["passengers"].to_i
+        @passengers.times do
+            @booking.passengers.build
         end
     end
 
     def create
-        puts params["passenger"]
+        
     end
 
     def show
+        
+    end
 
+    private 
+    def booking_params
+        params.require(:booking).permit(:flight_id, passengers_attributes: [:id, :name, :email])
     end
 end

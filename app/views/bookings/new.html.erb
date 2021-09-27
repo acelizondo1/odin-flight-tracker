@@ -1,4 +1,5 @@
-<%= form_with(model: @booking) do |form| %>
+<%= form_with(model: @booking, local: true) do |f| %>
+    <%= f.hidden_field :flight_id, value: @flight.id %>
     <div class="columns m-6">
         <div class="column is-4 is-offset-1" id="flight_details">
             <div class="box has-text-left">
@@ -30,28 +31,27 @@
 
         <div class="column is-5 box m-3" id="passenger_form">
             <h5 class="is-size-5 has-text-left"><strong>Please Enter Passenger Information</strong></h5>
-            <% @passengers.each_with_index do |passenger, i| %>
-                <%= form.fields_for passenger do |passenger_form| %>
-                    <h6 class="is-size-6 has-text-left m-2"><strong>Passenger <%= i+1 %></strong></h6>
+            <% i = 0 %>
+                <%= f.fields_for :passengers do |passenger_form| %>
+                    <h6 class="is-size-6 has-text-left m-2"><strong>Passenger <%=  i+=1 if i != @passengers %></strong></h6>
                     <div class="field is-horizontal">
                         <div class="field-label is-align-self-center has-text-weight-semibold">
-                            <%= passenger_form.label :name %> 
+                            Name: 
                         </div>
                         <div class="field-body">
-                            <%= passenger_form.text_field :name, class: 'input' %>
+                            <%= passenger_form.text_field :name, required: true, class: 'input' %>
                         </div>
                     </div>
                     <div class="field is-horizontal">
                         <div class="field-label is-align-self-center has-text-weight-semibold">
-                            <%= passenger_form.label :email %> 
+                            Email: 
                         </div>
                         <div class="field-body">
-                            <%= passenger_form.text_field :email, class: 'input' %>
+                            <%= passenger_form.text_field :email, reuired:true, class: 'input' %>
                         </div>
                     </div>
                 <% end %>
-            <% end %>
-            <%= form.submit 'Confirm Booking', class: "button" %>
+            <%= f.submit 'Confirm Booking', class: "button" %>
         </div>
     </div>
 <% end %>
