@@ -67,8 +67,11 @@
             <% end %>
         </div>
 
-        <div id="flight_search_results">
+        <div id="flight_search_results" class="pt-6">
             <% if @search_submit == true %>
+                <h5 class="is-size-5 has-text-weight-bold">
+                    Showing Flights From <%= Airport.details(@params["from_airport_id"]) %> To <%= Airport.details(@params["to_airport_id"]) %> On <%= @params["date"] %>
+                </h3>
                 <%= render 'flight_search_results' %>
             <% end %>
         </div>

@@ -3,6 +3,7 @@ class FlightsController < ApplicationController
     def index
         if params['from_airport_id']
             @search_submit = true
+            @params = params
             @found_flights = Flight.find_flights(params['from_airport_id'], params['to_airport_id'], params['date'])
             @passengers = params['passengers']
         end
