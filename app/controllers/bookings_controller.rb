@@ -3,7 +3,8 @@ class BookingsController < ApplicationController
 
     def index
         @search_submit = false
-        if params["email"]
+        @email = params["email"]
+        if @email
             @search_submit = true
             @bookings = Booking.joins(:passengers).where("email=?", params["email"])
         end

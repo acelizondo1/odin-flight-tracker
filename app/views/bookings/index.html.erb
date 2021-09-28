@@ -26,6 +26,9 @@
 
         <div>
             <% if @search_submit == true %>
+                <h3 class="is-size-5 has-text-weight-bold">
+                    Showing Bookings For Email: <%= @email %>
+                </h3>
                 <% if !@bookings.empty? %>
                     <table class="table m-3 is-fullwidth is-hoverable">
                         <thead>
