@@ -1,6 +1,6 @@
 <% if !@found_flights.empty? %>
     <%= form_with url: new_booking_path, method: :get do |form| %>
-        <table class="table m-3 is-fullwidth is-light is-hoverable">
+        <table class="table m-3 is-fullwidth is-hoverable">
             <thead>
                 <tr>
                     <th>Flight</th>
@@ -21,14 +21,13 @@
                         <th><%= flight.departure_time.strftime('%a, %b %d, %Y') %></th>
                         <th><%= flight.departure_time.strftime('%l:%M %p') %></th>
                         <th><%= Time.at(flight.duration.to_i).utc.strftime("%k hr %M min") %></th>
-                        <!--<th><%= link_to 'Book', root_path, class: 'button is-info is-small' %></th>-->
                         <th><%= form.radio_button :flight_id, flight.id %></th>
                     </tr>
                 <% end %>
             </tbody>
         </table>
         <%= form.hidden_field :passengers, value: @passengers %>
-        <%= form.submit 'Continue to Passenger Details', class: 'button is-success is-light is-rounded'%>
+        <%= form.submit 'Continue to Passenger Details', class: 'button is-white bordered is-rounded'%>
     <% end %>
 <% else %>
     <div class="m-6">
