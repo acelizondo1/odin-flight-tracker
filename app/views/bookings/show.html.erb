@@ -1,0 +1,31 @@
+<div class="columns m-6">
+    <div class="column is-6 is-offset-3 box">
+        <h3 class="is-size-3"> Booking Summary </h3>
+        <br />
+        <div class="is-size-6">
+            <p class="mb-2">
+                <strong>Flight: </strong><%= @flight.id %> 
+            </p>
+            <p class="mb-2">
+                <strong>From: </strong><span class="mr-3"><%= Airport.details(@flight.from_airport_id) %></span>
+                <strong>To: </strong><%= Airport.details(@flight.to_airport_id) %>
+            </p>
+            <p class="mb-2">
+                <strong>Departing At: </strong><%= @flight.departure_time.strftime('%a, %b %d, %Y at %l:%M %p') %>
+            </p>
+            <p class="mb-2">
+                <strong>Flight Time: </strong><%= Time.at(@flight.duration.to_i).utc.strftime("%k hr %M min") %>
+            </p>
+        </div>
+        <br />
+        <div class="is-size-6 m-3">
+            <h5 class="is-size-4 has-text-weight-semibold">Passengers</h5>
+            <% @booking.passengers.each_with_index do |passenger, i| %>
+                <p class="m-2">
+                    <strong>Passenger <%= i+1 %>: </strong>
+                    <%= passenger.name + "(" + passenger.email + ")" %>    
+                </p>
+            <% end %>
+        </div>
+    </div>
+</div>
