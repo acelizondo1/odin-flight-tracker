@@ -66,14 +66,6 @@ def find_flight_time(from, to)
     FLIGHT_DURATIONS[from][to] || FLIGHT_DURATIONS[to][from]
 end
 
-# def rand_time(from, to=Time.now)
-#     Time.at(rand_in_range(from.to_f, to.to_f))
-# end
-
-# def rand_in_range(from, to)
-#     rand * (to - from) + from
-# end
-
 airports = Airport.create([
     {city: 'Detroit', state: 'MI', airport_code: 'DTW'},
     {city: 'Minneapolis', state: 'MN', airport_code: 'MSP'},
@@ -86,28 +78,16 @@ airports = Airport.create([
     {city: 'Denver', state: 'CO', airport_code: 'DEN'}
 ])
 
-# flights = []
-# (1..60).each do |int|
-#     to_airport = rand(1..9)
-#     from_airport = rand(1..9)
-#     while to_airport == from_airport
-#         from_airport = rand(1..9)
-#     end
-#     Flight.create([:departure_time => rand_time(int.days.from_now), :duration=> "2hrs", :to_airport_id => to_airport, :from_airport_id => from_airport])
-# end
-
 (1..9).each do |from|
     (1..9).each do |to|
-        if from == to
-            break
-        end
-        
-        DateTime.new(2022, 1, 1).upto(DateTime.new(2022, 1, 15)).each do |date|
-            3.times do 
-                hour = rand(6..20)
-                minute = rand(0..59)
-                date = date.change(hour: hour, minute: minute)
-                Flight.create([:departure_time => date, :duration=> find_flight_time(from, to), :to_airport_id => to, :from_airport_id => from])
+        if from != to
+            DateTime.new(2022, 1, 1).upto(DateTime.new(2022, 1, 15)).each do |date|
+                3.times do 
+                    hour = rand(6..20)
+                    minute = rand(0..59)
+                    date = date.change(hour: hour, minute: minute)
+                    Flight.create([:departure_time => date, :duration=> find_flight_time(from, to), :to_airport_id => to, :from_airport_id => from])
+                end
             end
         end
     end
