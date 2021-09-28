@@ -1,6 +1,14 @@
 class BookingsController < ApplicationController
     before_action :set_flight, only: [:new]
 
+    def index
+        @search_submit = false
+        if params["email"]
+            @search_submit = true
+            @bookings = Booking.joins(:passengers).where("email=?", params["email"])
+        end
+    end
+
     def new
         @booking = Booking.new
         @passengers = params["passengers"].to_i

@@ -14,13 +14,41 @@
                         <div class="field-body is-flow-root">
                             <div class="field is-narrow">
                                 <div class="control">
-                                    <%= f.text_field :email, class: 'input' %>
+                                    <%= f.email_field :email, class: 'input' %>
                                 </div>
                             </div>
                         </div>
                         <%= f.submit 'Search', class: 'button bordered ml-2' %>
                     </div>
                 </div>
+            <% end %>
+        </div>
+
+        <div>
+            <% if @search_submit == true %>
+                <% if !@bookings.empty? %>
+                    <table class="table m-3 is-fullwidth is-hoverable">
+                        <thead>
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Flight Path</th>
+                                <th>Flight Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% @bookings.each do |booking| %>
+                                <% flight = Flight.find(booking.flight_id) %>
+                                <tr>
+                                    <th><%= booking.id %></th>
+                                    <th><%= Airport.details(flight.from_airport_id) + "->" + Airport.details(flight.to_airport_id) %></th>
+                                    <th><%= flight.departure_time.strftime('%a, %b %d, %Y') %></th>
+                                    <th><%= link_to 'Open Booking', booking_path(booking.id), class: 'button' %></th>
+                                </tr>
+                            <% end %>
+                        </tbody>
+                    </table>
+                <% end %>
             <% end %>
         </div>
     </div>
