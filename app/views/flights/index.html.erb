@@ -71,7 +71,27 @@
             <% if @search_submit == true %>
                 <h5 class="is-size-5 has-text-weight-bold">
                     Showing Flights From <%= Airport.details(@params["from_airport_id"]) %> To <%= Airport.details(@params["to_airport_id"]) %> On <%= @params["date"] %>
-                </h3>
+                </h5>
+                <div class="is-inline-block">
+                    <% date = Date.parse(params['date']) %>
+                    <%= form_with url: root_path, method: :get do |prev_form| %>
+                        <%= prev_form.hidden_field :from_airport_id, value: @params['from_airport_id'] %>
+                        <%= prev_form.hidden_field :to_airport_id, value: @params['to_airport_id'] %>
+                        <%= prev_form.hidden_field :passengers, value: @params['passengers'] %>
+                        <%= prev_form.hidden_field :date, value: date.prev_day %>
+                        <%= prev_form.submit '<< '+date.prev_day.to_s, class: 'button is-white bordered is-small' %>
+                        
+                    <% end %>
+                </div>
+                <div class="is-inline-block">
+                    <%= form_with url: root_path, method: :get do |next_form| %>
+                        <%= next_form.hidden_field :from_airport_id, value: @params['from_airport_id'] %>
+                        <%= next_form.hidden_field :to_airport_id, value: @params['to_airport_id'] %>
+                        <%= next_form.hidden_field :passengers, value: @params['passengers'] %>
+                        <%= next_form.hidden_field :date, value: date.next_day %>
+                        <%= next_form.submit date.next_day.to_s+' >>', class: 'button is-white bordered is-small' %>
+                    <% end %>
+                </div>
                 <%= render 'flight_search_results' %>
             <% end %>
         </div>
