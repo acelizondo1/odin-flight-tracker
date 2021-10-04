@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Your Flight Has Been Successfully Booked!</h1>
+    <p>
+      A reservation has been made for <%= pluralize(@booking.passengers.count, "passenger") %>
+    </p>
+    <h2>Flight Details</h2>
+    <p>Flight ID: <%= @flight.id %></p>
+    <p>From <%= Airport.details(@flight.from_airport_id) %> To <%= Airport.details(@flight.to_airport_id) %></p>
+    <p>Depature Time: <%= @flight.departure_time.strftime('%a, %b %d, %Y at %l:%M %p') %></p>
+    <p>Flight Time: <%= Time.at(@flight.duration.to_i).utc.strftime("%k hr %M min") %></p>
+
+    <%= link_to 'Click here to view the full flight booking.', @booking_url %>
+  </body>
+</html>

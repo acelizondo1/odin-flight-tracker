@@ -1,0 +1,12 @@
+Your Flight Has Been Successfully Booked!
+=========================================
+
+A reservation has been made for <%= @booking.passengers.count %> <%= pluralize(@booking.passengers.count, "passenger") %>
+
+Flight Details:
+Flight ID: <%= @flight.id %>
+From <%= Airport.details(@flight.from_airport_id) %> To <%= Airport.details(@flight.to_airport_id) %>
+Depature Time: <%= @flight.departure_time.strftime('%a, %b %d, %Y at %l:%M %p') %>
+Flight Time: <%= Time.at(@flight.duration.to_i).utc.strftime("%k hr %M min") %>
+
+<%= link_to 'Click here to view the full flight booking.', @booking_url %>
